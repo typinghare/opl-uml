@@ -15,4 +15,4 @@ let rec fibonacci n =
 
 (* Test case: calculate and print the 10th Fibonacci number *)
 let fibonacci_10th_num = fibonacci(10);;
-Printf.printf "The 10th Fibonacci number is: %d\n" fibonacci_10th_num;;
+Printf.printf "The 10th Fibonacci number is: %d" fibonacci_10th_num;;

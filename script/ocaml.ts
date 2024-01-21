@@ -1,6 +1,7 @@
 import * as path from 'path'
 import { exec } from 'child_process'
 import { DataCollection, Datum } from '@typinghare/extrum'
+import * as process from 'process'
 
 /**
  * The environment.

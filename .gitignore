@@ -133,3 +133,6 @@ Temporary Items
 
 # Jetbrains
 .idea
+
+# VS Code
+.vscode

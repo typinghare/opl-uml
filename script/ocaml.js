@@ -27,6 +27,7 @@ exports.ExecutableManager = exports.Executable = exports.Environment = void 0;
 const path = __importStar(require("path"));
 const child_process_1 = require("child_process");
 const extrum_1 = require("@typinghare/extrum");
+const process = __importStar(require("process"));
 /**
  * The environment.
  */
