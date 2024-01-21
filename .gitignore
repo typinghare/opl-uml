@@ -136,3 +136,6 @@ Temporary Items
 
 # VS Code
 .vscode
+
+# OMake
+target
