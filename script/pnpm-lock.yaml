@@ -1,0 +1,29 @@
+lockfileVersion: '6.0'
+
+settings:
+  autoInstallPeers: true
+  excludeLinksFromLockfile: false
+
+dependencies:
+  '@types/node':
+    specifier: ^20.11.5
+    version: 20.11.5
+  '@typinghare/extrum':
+    specifier: ^2.2.0
+    version: 2.2.0
+
+packages:
+
+  /@types/node@20.11.5:
+    resolution: {integrity: sha512-g557vgQjUUfN76MZAN/dt1z3dzcUsimuysco0KeluHgrPdJXkP/XdAURgyO2W9fZWHRtRBiVKzKn8vyOAwlG+w==}
+    dependencies:
+      undici-types: 5.26.5
+    dev: false
+
+  /@typinghare/extrum@2.2.0:
+    resolution: {integrity: sha512-/btBHKnG/vNmMpAHn8KSoB8sNUNGcmIwF2OlwDpfW/lPhwNm6j28H5STzHb68jFNTjGpwZ3wPOjq8Yqrz1td0Q==}
+    dev: false
+
+  /undici-types@5.26.5:
+    resolution: {integrity: sha512-JlCMO+ehdEIKqlFxk6IfVoAUVmgz7cU7zD/h9XZ0qzeosSHmUJVOzSQvvYSYWXkFXC+IfLKSIffhv0sVZup6pA==}
+    dev: false
