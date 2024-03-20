@@ -1,0 +1,16 @@
+# Copyright 2024 James Chan
+# -------------------------------------------
+# Take n = 4 as example:
+# Setup: [4] -> [4, 0] (push a zero and swap)
+# FindNext: [4, 0] -> [0, 4] -> [0, 0, 4] -> [1, 0, 0, 4] -> [1, 0, 4]
+# 3Cycle: [1, 0, 4] -> [0, 1, 4] -> [4, 1, 0] (Swap the first three elements)
+# FindNext#2: [4, 1, 0] -> [1, 4, 0] ->* [2, 1, 4, 0]
+# 3Cycle#2: [2, 1, 4, 0] -> [1, 2, 4, 0] -> [4, 2, 1, 0]
+# FindNext#3: [4, 2, 1, 0] -> [2, 4, 1, 0] ->* [3, 2, 4, 1, 0]
+# 3Cycle#3: [3, 2, 4, 1, 0] -> [2, 3, 4, 1, 0] -> [4, 3, 2, 1, 0]
+# FindNext#4: [4, 3, 2, 1, 0] ->* [4, 3, 4, 2, 1, 0]
+# 3Cycle#4: [4, 3, 4, 2, 1, 0] ->* [4, 4, 3, 2, 1, 0] (break case)
+# -------------------------------------------
+# Note: The name "3-cycle alogrithm" takes insipration from a namesake Rubik's cube term.
+# -------------------------------------------
+< push 0; swap 1; whilene { swap 1; dup; push 1; add; swap 1; swap 2 }; pop, 10::[] >

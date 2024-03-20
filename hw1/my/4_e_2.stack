@@ -1,0 +1,22 @@
+# Failure
+# <Code>
+# Setup: [m, n] -> [m, m, n] -> [n, m, m] -> [n, n, m, m] -> [m, n, n, m] -> [n, m, n, m]
+#     </> dup; swap 2; dup; swap 2; swap 1
+# 
+# Reduce: [n, m, m] -> [k, m] (where k = m / n) -> [-1, k, m] -> [-k, m] -> [m - k]
+# It's easy to prove that m - k >= 0. Let t = m - k.
+# If t == 0 or t == 1, return t; else if t > 1; return 1.
+#     </> div; mul; push -1; mul; add
+# 
+# Skip0: (t == 0) [0] -> [0, 0] -> [0] 
+#     </> push 0; whilene { c }; pop
+# 
+# Skip1: (t == 1) [1] -> [0, 1] -> [1] -> [1, 1] -> [1]
+#     </> push 0; whilene { pop; push 1; whilene{ c } }; pop
+# 
+# Shrink: (t > 1) [t] -> [0, t] -> [t] -> [1, t] -> [t] -> [t, t] ->
+#                 [-1, t, t] -> [t - 1, t] -> [1] -> [1, 1] -> [1]
+#     </> push 0; whilene { pop; push 1; whilene{ pop; dup; push -1; add; div; push 1 } }; pop
+#
+< whilene { pop; dup; push -1; add; div; push 1 } , 1::2::[]>
+#<dup; swap 2; dup; swap 2; swap 1; div; mul; push -1; mul; add; push 0; whilene { pop; push 1; whilene { pop; dup; push -1; add; div; push 1 } }; pop, 10::8::[]>

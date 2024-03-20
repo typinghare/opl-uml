@@ -1,0 +1,2 @@
+# Copyright 2024 James Chan
+< dup; push -1; whilene { add; dup; push -1 }; pop; pop; pop, 10::[] >

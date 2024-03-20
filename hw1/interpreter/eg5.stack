@@ -1,0 +1,4 @@
+# This is a bad program, it tries to pop too many things...
+< pop; pop, 7 :: [] >
+
+
