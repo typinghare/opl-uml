@@ -1,10 +1,10 @@
 /* Examples for testing */
 
-true;
-if false then true else false; 
-
-0;
-pred 0;
-succ (pred 0);
-iszero 0;
-iszero (pred (succ (succ 0))); 
+true;                               /* true */
+if false then true else false;      /* false */
+0;                                  /* 0 */
+pred 0;                             /* 0 */
+succ (pred 0);                      /* 1 */
+pred (succ (succ 0));               /* 1 */
+iszero 0;                           /* true */
+iszero (pred (succ (succ 0)));      /* false */
