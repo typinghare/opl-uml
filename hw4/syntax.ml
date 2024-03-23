@@ -6,7 +6,7 @@ open Support.Pervasive
 (* Datatypes *)
 
 type term =
-    TmVar of info * int * int
+    TmVar of info * int * int (* pointer value, store value *)
   | TmAbs of info * string * term
   | TmApp of info * term * term
   | TmLoc of info * int
@@ -58,7 +58,7 @@ let index2name fi ctx x =
 let rec name2index fi ctx x =
   match ctx with
       [] -> error fi ("Identifier " ^ x ^ " is unbound")
-    | (y,_)::rest ->
+    | (y, _)::rest ->
         if y=x then 0
         else 1 + (name2index fi rest x)
 
