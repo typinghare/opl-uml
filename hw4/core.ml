@@ -3,6 +3,8 @@ open Syntax
 open Support.Error
 open Support.Pervasive
 
+(* Collaborator: Rohan Mallu *)
+
 (* ------------------------   EVALUATION  ------------------------ *)
 
 (* Checks if a term is a value. *)
@@ -14,7 +16,11 @@ let rec isval ctx (t: term) =
 
 type store = term list  
 let emptystore = []
-let extendstore store v = (List.length store, List.append store [v])
+
+(* Appends a term to a store, and return a new store. *)
+let extendstore (store: store) (v: term) : int * store = (List.length store, List.append store [v])
+
+(* Looks up a  *)
 let lookuploc store l = List.nth store l
 
 (* Updates the store by storing a new term at a given location. *)
@@ -28,69 +34,39 @@ let updatestore (store: store) (n: int) (v: term) =
 
 let shiftstore i store = List.map (fun t -> termShift i t) store 
 
-
 exception NoRuleApplies
 
-(* Implement small-step semantics for Lambda Calculus extended with References. *)
-(* Refer to Lecture #15 for grammar and small-step semantics. *)
-(* The grammar is shown on slide# 6/36). *)
-(* The small step semantics are shown on slides 8/36 and 9/36. *)
-(* HINT: To substitute v in t for all top variables (i.e., variables of index 0), *)
-(*               use function `termSubstTop v t`  defined in syntax.ml. *)
 let rec eval1 (ctx: context) (store: store) (t: term) : term * store  =
   match t with
-  | TmVar(_, _, _) -> 
-    (* Var *)
-    (t, store)  (* What should we do here? *)
-  | TmAbs(_, _, _) -> 
-    (* Abs *)
-    (t, store)
-  | TmLoc(_, _) ->
-    (* Loc *)
-    (t, store)
-  | TmApp(fi, t1, t2) when (isval ctx t1) ->
-    begin 
-      match t1 with
-      | TmAbs(_, _, e) when (isval ctx t2) ->
-        (* App *)
-        ((termSubstTop t2 e), store)   (* Beta reduction *)
-      | TmAbs(_, _, _) ->
-        (* RApp *)
-        let t2', store' = eval1 ctx store t2 in
-        (TmApp(fi, t1, t2'), store')
-      | _ -> raise NoRuleApplies
-    end
-  | TmApp(fi, t1, t2) ->
-    (* LApp *)
-    let t1', store' = eval1 ctx store t1 in
-    (TmApp(fi, t1', t2), store')
-  | TmRef(fi, t1) when (isval ctx t1) ->
-    (* Ref *)
-    let loc, store' = extendstore store t1 in
-    (TmLoc(fi, loc), store')
-  | TmRef(fi, t1) ->
-    (* RefSimp *) 
-    let t1', store' = eval1 ctx store t1 in
-    (TmRef(fi, t1'), store')
-  | TmDeref(_, TmLoc(_, l)) ->
-    (* Deref *)
-    ((lookuploc store l), store)
-  | TmDeref(fi, t1) ->
-    (* DerefSimp *)
-    let t1', store' = eval1 ctx store t1 in
-    (TmDeref(fi, t1'), store')
-  | TmAssign(fi, TmLoc(_, l), t2) when (isval ctx t2) ->
-    (* Assign *)
-    let store' = (updatestore store l t2) in
-    (t2, store')
-  | TmAssign(fi, t1, t2) when (isval ctx t1) ->
-    (* RAssign *)
-    let t2', store' = eval1 ctx store t2 in
-    (TmAssign(fi, t1, t2'), store')
-  | TmAssign(fi, t1, t2) ->
-    (* LAssign *)
-    let t1', store' = eval1 ctx store t1 in
-    (TmAssign(fi, t1', t2), store')
+  | TmApp(fi, TmAbs(_, _, e), t2) when (isval ctx t2) ->    (* [App] *)
+    ((termSubstTop t2 e), store)                            (* Beta reduction *)
+  | TmApp(fi, abs, e1) when (isval ctx abs) ->              (* [RApp] *)
+    let e1', store' = eval1 ctx store e1 in                 (* Evaluate e1 *)
+    (TmApp(fi, abs, e1'), store')                           (* Return <abs e1', σ'> *)
+  | TmApp(fi, e0, e1) ->                                    (* [LApp] *)
+    let e0', store' = eval1 ctx store e0 in                 (* Evaluate e0 *)
+    (TmApp(fi, e0', e1), store')                            (* Return <e0' e1, σ'> *)
+  | TmRef(fi, v) when (isval ctx v) ->                      (* [Ref] *)
+    let l, store' = extendstore store v in                  (* Insert the value into store *)
+    (TmLoc(fi, l), store')                                  (* Return <l, σ'> *)
+  | TmRef(fi, e) ->                                         (* [RefSimp] *) 
+    let e', store' = eval1 ctx store e in                   (* Evaluate e *)
+    (TmRef(fi, e'), store')                                 (* Return <ref e', σ'> *)
+  | TmDeref(_, TmLoc(_, l)) ->                              (* [Deref] *)
+    ((lookuploc store l), store)                            (* Return <v, σ'> *)
+  | TmDeref(fi, e) ->                                       (* [DerefSimp] *)
+    let e', store' = eval1 ctx store e in                   (* Evaluate e *)
+    (TmDeref(fi, e'), store')                               (* Return <!e', σ'> *)
+  | TmAssign(fi, TmLoc(_, l), v) when (isval ctx v) ->      (* [Assign] *)
+    let store' = (updatestore store l v) in                 (* Update store *)
+    (v, store')                                             (* Return <v, σ'> *)
+  | TmAssign(fi, l, e1) when (isval ctx l)->                (* [RAssign] *)
+    let e1', store' = eval1 ctx store e1 in                 (* Evaluate e1 *)
+    (TmAssign(fi, l, e1'), store')                          (* Return <l := e1', σ'> *)
+  | TmAssign(fi, e0, e1) ->                                 (* [LAssign] *)
+    let e0', store' = eval1 ctx store e0 in                 (* Evaluate e0 *)
+    (TmAssign(fi, e0', e1), store')                         (* Return <e0' := e1, σ'> *)
+  | _ -> raise NoRuleApplies                                (* Var, Abs, and Loc are axioms *)
 
 let rec eval ctx store t =
   try let t', store' = eval1 ctx store t

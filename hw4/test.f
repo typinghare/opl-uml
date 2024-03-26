@@ -14,5 +14,5 @@ z/;
 ! (ref (lambda a. a))  ;
 ref x := ref (lambda x. x x);
 ref (lambda k. k) := ref (lambda x. x x);
-      
-      
+
+! (ref (lambda x. x)) ;    
