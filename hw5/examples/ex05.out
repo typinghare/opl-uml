@@ -1,0 +1,16 @@
+Expression:
+  let y = true in let f = (\x. (\y. x)) in let g = (\z. y) in (f g)
+
+Typechecking the expression...
+Initial Type:
+  'd
+
+Constraints:
+  ('a -> ('b -> 'a)) = (('c -> bool) -> 'd)
+
+Result:
+  ('b -> ('c -> bool))
+
+Evaluating the expression...
+Result:
+  <closure>

@@ -1,0 +1,16 @@
+Expression:
+  let id = (\x. x) in (id 7)
+
+Typechecking the expression...
+Initial Type:
+  'b
+
+Constraints:
+  ('a -> 'a) = (int -> 'b)
+
+Result:
+  int
+
+Evaluating the expression...
+Result:
+  7

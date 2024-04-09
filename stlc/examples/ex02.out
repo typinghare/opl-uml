@@ -1,0 +1,6 @@
+Expression:
+  (\x. (x + x))
+
+Evaluating the expression...
+Result:
+  <closure>

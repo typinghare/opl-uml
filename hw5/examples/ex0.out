@@ -1,0 +1,11 @@
+Expression:
+  (\x. (x x))
+
+Typechecking the expression...
+Initial Type:
+  ('a -> 'b)
+
+Constraints:
+  'a = ('a -> 'b)
+
+Fatal error: exception Check.UnificationError

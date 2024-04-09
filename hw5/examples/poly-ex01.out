@@ -1,0 +1,18 @@
+Expression:
+  let id = (\x. x) in (id 7)
+
+Typechecking the expression...
+  using let polymorphism
+
+Initial Type:
+  'c
+
+Constraints:
+  ('b -> 'b) = (int -> 'c)
+
+Result:
+  int
+
+Evaluating the expression...
+Result:
+  7

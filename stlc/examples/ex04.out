@@ -1,0 +1,6 @@
+Expression:
+  let y = 7 in let f = (\x. (y + 35)) in let y = 100 in (f 7)
+
+Evaluating the expression...
+Result:
+  42

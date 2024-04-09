@@ -1,0 +1,18 @@
+Expression:
+  let y = true in let f = (\x. (\y. x)) in let g = (\z. y) in (f g)
+
+Typechecking the expression...
+  using let polymorphism
+
+Initial Type:
+  'g
+
+Constraints:
+  ('d -> ('e -> 'd)) = (('f -> bool) -> 'g)
+
+Result:
+  ('e -> ('f -> bool))
+
+Evaluating the expression...
+Result:
+  <closure>

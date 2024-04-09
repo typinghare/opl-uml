@@ -1,0 +1,20 @@
+
+What to do
+==========
+
+Fill in the functions in test.ml.
+
+How to build
+============
+
+ocamlbuild -use-ocamlfind test.native
+
+How to debug
+============
+
+Use utop and invoke functions. You should see the relevant output.
+
+What to submit
+=============
+
+Submit completed test.ml in gradescope under the assignment "Practice maps and sets"

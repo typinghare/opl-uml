@@ -1,5 +1,9 @@
 /* Examples for testing */
 
+(ref (lambda x. x));
+(! (ref (lambda x. x)));
+
+
 x/;
 y/;
 z/;

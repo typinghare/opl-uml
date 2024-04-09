@@ -3,7 +3,11 @@ open Syntax
 open Support.Error
 open Support.Pervasive
 
-(* Collaborator: Rohan Mallu *)
+(*
+  Name: Zhuojian Chen (James)
+  Section: 202
+  Collaborators: Rohan Mallu; Anson Cheang
+*)
 
 (* ------------------------   EVALUATION  ------------------------ *)
 

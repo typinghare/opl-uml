@@ -1,0 +1,6 @@
+Expression:
+  let id = (\x. x) in (id 7)
+
+Evaluating the expression...
+Result:
+  7

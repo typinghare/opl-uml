@@ -1,0 +1,17 @@
+Expression:
+  let y = 7 in let f = (\x. (y + 35)) in let y = 100 in (f 7)
+
+Typechecking the expression...
+Initial Type:
+  'b
+
+Constraints:
+  int = int
+  ('a -> int) = (int -> 'b)
+
+Result:
+  int
+
+Evaluating the expression...
+Result:
+  42

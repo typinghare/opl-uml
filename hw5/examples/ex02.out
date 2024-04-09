@@ -1,0 +1,16 @@
+Expression:
+  (\x. (x + x))
+
+Typechecking the expression...
+Initial Type:
+  ('a -> int)
+
+Constraints:
+  'a = int
+
+Result:
+  (int -> int)
+
+Evaluating the expression...
+Result:
+  <closure>

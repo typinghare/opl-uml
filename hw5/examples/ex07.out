@@ -1,0 +1,20 @@
+Expression:
+  let p = (7 , true) in if #2 p then (#1 p + 35) else 21
+
+Typechecking the expression...
+Initial Type:
+  int
+
+Constraints:
+  int = int
+  'b = bool
+  'c = int
+  (int * bool) = ('a * 'b)
+  (int * bool) = ('c * 'd)
+
+Result:
+  int
+
+Evaluating the expression...
+Result:
+  42

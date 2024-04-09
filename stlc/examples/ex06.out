@@ -1,0 +1,6 @@
+Expression:
+  let f = (\x. x) in let g = (\z. (z + (f z))) in true
+
+Evaluating the expression...
+Result:
+  true

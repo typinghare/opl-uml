@@ -1,0 +1,52 @@
+Description of Files:
+---------------------
+  - ast.ml    
+      Defines the datatypes for the abstract syntax trees (ASTs) and values.
+
+  - eval.ml
+      The interpreter for the ASTs. 
+
+  - helper.ml
+      Functions that should be helpful for implementing your solutions.
+
+  - lexer.mll
+  - parser.mly
+      A lexer and parser for the source language.
+
+  - pprint.ml
+      A pretty printer for the ASTs.
+
+  - main.ml
+      The top level code that parses in an input file and runs the
+      interpreter/typechecker.
+
+  - examples
+      Some test programs in the source language. You should really try
+      your solution out on all of these examples, and also come up
+      with some of your own. There's even a little script (test.sh) to 
+      help you try your solution against some test cases. The script will
+      say that your test case fails if it doesn't exactly match the
+      "gold standard" output. 
+
+What to do:
+----------
+
+Complete eval function from eval.ml. More comments inlined in the file.
+
+
+How to compile:
+---------------
+
+  If you have make installed, you can simply type "make" at the
+  command line. Successful compilation will produce an executable file called "lam".
+
+How to run:
+-----------
+
+./lam <file>
+  - attempts to  evaluate the program in <file>
+
+What to submit:
+---------------
+
+Submit eval.ml under the gradescope assignment "Practice STLC"

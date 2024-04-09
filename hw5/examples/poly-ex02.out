@@ -1,0 +1,18 @@
+Expression:
+  (\x. (x + x))
+
+Typechecking the expression...
+  using let polymorphism
+
+Initial Type:
+  ('a -> int)
+
+Constraints:
+  'a = int
+
+Result:
+  (int -> int)
+
+Evaluating the expression...
+Result:
+  <closure>

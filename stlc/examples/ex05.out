@@ -1,0 +1,6 @@
+Expression:
+  let y = true in let f = (\x. (\y. x)) in let g = (\z. y) in (f g)
+
+Evaluating the expression...
+Result:
+  <closure>
