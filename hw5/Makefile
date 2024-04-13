@@ -26,3 +26,6 @@ parser.mli : parser.mly
 
 clean:
 	rm -f *.cmo *.cmi lexer.ml parser.ml parser.mli $(MAIN)
+
+run: clean
+	make && cd examples && ls && ./test.sh && cd .. && make clean

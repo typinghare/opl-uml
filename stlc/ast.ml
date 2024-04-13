@@ -57,6 +57,7 @@ module Constr = Set.Make(struct
 end)
 
 (* evaluation environments *)
+(* Map<String, value> *)
 type env = value VarMap.t
 
 (* constraints *)

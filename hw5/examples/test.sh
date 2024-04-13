@@ -15,7 +15,7 @@ do
 	../lam ${f} &> ${dir}/${out} & pid=$!
     fi
     disown
-    sleep 0.2 && kill -9 ${pid} &> /dev/null
+    sleep 0.1 && kill -9 ${pid} &> /dev/null
     diff ${out} ${dir}/${out} &> /dev/null
     if [ $? -ne 0 ]; then
 	echo "failed"

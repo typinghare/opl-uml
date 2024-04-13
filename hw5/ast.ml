@@ -60,19 +60,19 @@ end)
 type env = value VarMap.t
 
 (* constraints *)
-type constr = Constr.t
+type constr = Constr.t  (* Set<Tuple<typ, typ>> *)
 
 (* sets of type variables *)
 type varset = VarSet.t
 
 (* type substitutions *)
-type subst = typ VarMap.t
+type subst = typ VarMap.t   (* Map<string, typ> *)
 
 (* type scheme - this is a pair of a set of generalized type variables and a type *)
 type typ_scheme = varset * typ
 
 (* typechecking environments - maps variables to types *)
-type context = typ VarMap.t
+type context = typ VarMap.t (* Map<typ, typ> *)
 
 (* typechecking environments - for let-polymorphism, contexts map variables to type schemes *)
 type pcontext = typ_scheme VarMap.t

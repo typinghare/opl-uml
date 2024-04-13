@@ -1,7 +1,7 @@
 open Ast
 
 (* [typ_eq t1 t2] returns [true] iff [t1] and [t2] are equal *)  
-let typ_eq (t1:typ) (t2:typ) : bool = 
+let typ_eq (t1: typ) (t2: typ) : bool =
   t1 = t2
 
 (* ---------- SUBSTITUTIONS ----------- *)
@@ -21,7 +21,7 @@ let rec subst_typ (t0:typ) (x:var) (t:typ) : typ =
       TArrow(subst_typ t1 x t, subst_typ t2 x t)
 
 (* [apply_subst s t0] applies the substitution [s] to [t0] *)
-let rec apply_subst (s:subst) (t0:typ) : typ =
+let rec apply_subst (s: subst) (t0: typ) : typ =
   match t0 with
     | TInt ->
       t0
@@ -36,7 +36,7 @@ let rec apply_subst (s:subst) (t0:typ) : typ =
       TArrow(apply_subst s t1, apply_subst s t2)
 
 (* [subst_constr c0 x t] replaces [TVar x] with [t] in [c0] *)
-let rec subst_constr (c0:constr) (x:var) (t:typ) : constr =
+let rec subst_constr (c0: constr) (x: var) (t: typ) : constr =
   Constr.fold
     (fun (t1,t2) -> Constr.add (subst_typ t1 x t, subst_typ t2 x t))
     c0 Constr.empty
@@ -49,7 +49,7 @@ let subst_pcontext (g:pcontext) (s:subst) : pcontext =
 (* ---------- FREE TYPE VARIABLES ---------- *)
 
 (* [ftvs t0] calculates the set of free variables of [t0] *)
-let rec ftvs (t0:typ) : varset =
+let rec ftvs (t0: typ): varset =
   match t0 with
     | TInt ->
       VarSet.empty
